@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Roleta da Sorte</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css'>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            background-image: url(https://s3-sa-east-1.amazonaws.com/marketing.totalcad.com.br/2022/Roleta/Prancheta%203.png);
+            background-position-x: 85%;
+            flex-wrap: wrap;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            border-bottom-style: none;
+            border-color: #000000;
+            border-left-style: none;
+            border-radius: 0px;
+            border-right-style: none;
+            border-top-style: none;
+            border-width: 1px;
+            height: 98vh;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .skills-wheel {
+            display: block;
+            margin: auto;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+            height: 35rem;
+            margin: 8% auto;
+            overflow: hidden;
+            position: relative;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            width: 35rem;
+        }
+
+        .skills-wheel:before {
+            border-style: solid;
+            border-width: 32px 32px 0 32px;
+            border-color: #1C1C1C transparent transparent transparent;
+            content: "";
+            height: 0;
+            left: 50%;
+            margin-left: -32px;
+            position: absolute;
+            top: 8px;
+            z-index: 100;
+            width: 0;
+        }
+
+        .skills-wheel .btn {
+            background-color: #404040;
+            color: #fff;
+            border: 4px solid #ffffff;
+            box-shadow: inset 0 -8px 0 #2b2b2b;
+            font-family: "avantgarde_bold", Helvetica, Arial, sans-serif;
+            height: 83px;
+            left: 49%;
+            line-height: 80px;
+            margin: -54px 0 0 -45px;
+            padding: 7px;
+            position: absolute;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            text-decoration: none;
+            text-align: center;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+            text-transform: uppercase;
+            top: 50%;
+            width: 82px;
+
+        }
+
+        .skills-wheel .btn:active {
+
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            height: 80px;
+            margin-top: -60px;
+        }
+
+        .wheel {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            border: 12px solid #1C1C1C;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            height: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            text-align: center;
+            width: 100%;
+            -webkit-transform-origin: center center;
+            -moz-transform-origin: center center;
+            -ms-transform-origin: center center;
+            -o-transform-origin: center center;
+            transform-origin: center center;
+        }
+
+        .wheel li {
+            /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+            font-family: "avantgarde_bold", Helvetica, Arial, sans-serif;
+            height: 50%;
+            line-height: 12px;
+            list-style: none;
+            left: 50%;
+            margin: 0 0 0 -112px;
+            padding: 0;
+            position: absolute;
+            -webkit-transform-origin: center bottom;
+            -moz-transform-origin: center bottom;
+            -ms-transform-origin: center bottom;
+            -o-transform-origin: center bottom;
+            transform-origin: center bottom;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            top: 0;
+            width: 42%
+        }
+
+        .wheel li:before {
+            display: none;
+        }
+
+        .wheel a {
+            color: #fff;
+            left: 0;
+            position: absolute;
+            text-decoration: none;
+            top: 3rem;
+            font-size: 2rem;
+            width: 100%;
+            transform: rotate(90deg);
+        }
+
+        .wheel li:nth-child(1) {
+            -webkit-transform: rotate(0);
+            -moz-transform: rotate(0);
+            -ms-transform: rotate(0);
+            -o-transform: rotate(0);
+            transform: rotate(0);
+            background: #FFF;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+        }
+
+        .wheel li:nth-child(2) {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+            background: #FA4A2C;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+
+        }
+
+        .wheel li:nth-child(3) {
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            transform: rotate(90deg);
+            background: #FFF;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+        }
+
+        .wheel li:nth-child(4) {
+            -webkit-transform: rotate(135deg);
+            -moz-transform: rotate(135deg);
+            -ms-transform: rotate(135deg);
+            -o-transform: rotate(135deg);
+            transform: rotate(135deg);
+            background: #FA4A2C;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+        }
+
+        .wheel li:nth-child(5) {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+            background: #FFF;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+
+        }
+
+        .wheel li:nth-child(6) {
+            -webkit-transform: rotate(225deg);
+            -moz-transform: rotate(225deg);
+            -ms-transform: rotate(225deg);
+            -o-transform: rotate(225deg);
+            transform: rotate(225deg);
+            background: #FA4A2C;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+        }
+
+        .wheel li:nth-child(7) {
+            -webkit-transform: rotate(270deg);
+            -moz-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            -o-transform: rotate(270deg);
+            transform: rotate(270deg);
+            background: #FFF;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+
+        }
+
+        .wheel li:nth-child(8) {
+            -webkit-transform: rotate(315deg);
+            -moz-transform: rotate(315deg);
+            -ms-transform: rotate(315deg);
+            -o-transform: rotate(315deg);
+            transform: rotate(315deg);
+            background: #FA4A2C;
+            clip-path: polygon(100% 0, 0 0, 50% 100%);
+        }
+
+        .wheel li:nth-child(odd) img {
+            -webkit-opacity: 0.8;
+            -moz-opacit: 0.8;
+            opacity: 0.8;
+        }
+
+        .premio {
+            color: #fff;
+            text-align: center;
+            padding: 3rem;
+            width: 50vw;
+            display: flex !important;
+            flex-direction: column;
+            font-family: sans-serif
+        }
+
+        .premio span {
+            display: none;
+        }
+
+        .premio h2 {
+            font-size: 4rem;
+        }
+
+        .fancybox-opened .fancybox-skin {
+            box-shadow: none;
+            background: #c50d0d;
+        }
+
+        @media screen and (max-width: 500px) {
+            .skills-wheel {
+                max-height: 426px;
+                margin: auto;
+                margin-top: 1px;
+                position: relative;
+                width: 23rem;
+            }
+            .premio h2{
+                font-size: 2rem;
+            }
+            .zwcad{
+                margin: 18px;
+                height: 135px;
+            }
+            .sketch{
+                margin: 18px;
+                height: 135px;
+            }
+
+            .wheel {
+                left: -2px;
+                top: 35px;
+                max-width: 360px;
+                border: 6px solid #1C1C1C;
+                max-height: 360px;
+
+            }
+
+            .wheel li {
+                height: 52%;
+                line-height: 60px;
+                list-style: none;
+                top: -34px;
+                left: 61%;
+                margin: 29px 0px 0px -112px;
+                padding: 0px;
+            }
+
+            .skills-wheel:before {
+                top: 40px;
+            }
+
+            .fancybox-opened {
+                padding: 0%;
+                overflow: visible !important;
+            }
+
+            .fancybox-skin {
+                padding: 0%;
+                overflow: visible !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+
+
+    <div class="skills-wheel">
+        <ul class="wheel">
+            <li>
+                <a style="color: #FA4A2C;" href="#commercial-awareness" class="fancybox">18%</a>
+
+            </li>
+            <li>
+                <a href="#communication" class="fancybox">15%</a>
+
+            </li>
+            <li>
+                <a style="color: #FA4A2C;" href="#teamwork" class="fancybox">12%</a>
+
+            </li>
+            <li>
+                <a href="#negotiation" class="fancybox">20%</a>
+
+            </li>
+            <li>
+                <a style="color: #FA4A2C;" href="#problem-solving" class="fancybox">13%</a>
+
+            </li>
+            <li>
+                <a href="#leadership" class="fancybox">15%</a>
+
+            </li>
+            <li>
+                <a style="color: #FA4A2C;" href="#organisation" class="fancybox">1%</a>
+
+            </li>
+            <li>
+                <a href="#entrepreneurial-skills" class="fancybox">12%</a>
+
+            </li>
+
+        </ul>
+        <a href="#/" title="TITLE TEXT." class="btn">Clique</a>
+
+        <style>
+            .btn {
+
+                background-color: #fa8072;
+                color: white;
+                border: 2px solid rgba(0, 0, 0, 0.2);
+                border-radius: 0.25em;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                transition: all 0.2s ease-in-out;
+                font-size: 1.25rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.025em;
+                padding: 1em 2em;
+                transform: translateY(0);
+                box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                transition: all 0.15s ease;
+                cursor: pointer;
+            }
+        </style>
+
+
+        <!-- OVERLAY Commercial Awareness -->
+        <div style="padding: 24px;" id="commercial-awareness" class="hide premio">
+            <h2>Desculpe...</h2>
+
+            <p id="desc1"> Tente Novamente</p>
+
+        </div>
+
+        <!-- OVERLAY Communication -->
+        <div style="padding: 24px;" id="communication" class="hide premio">
+            <h2>Desculpe...</h2>
+
+            <p id="desc2"> Tente Novamente</p>
+        </div>
+
+        <!-- OVERLAY Teamwork -->
+        <div style="padding: 24px;" id="teamwork" class="hide premio">
+            <h2>Desculpe...</h2>
+
+            <p id="desc3"> Tente Novamente</p>
+        </div>
+
+        <!-- OVERLAY Negotiation -->
+        <!-- Botão funcional -->
+        <div style="padding: 24px;" style="padding: 24px;" id="negotiation" class="hide premio">
+            <h2>Parabéns</h2>
+            <p style="font-size: 30px;">Você ganhou um desconto de 20%!!</p>
+            <span id="desc4"> MEU CUPOM </span>
+            <a href=""><button
+                    class=" js-confetti" id="copyButton" onclick="copyFunction()" data-clipboard-target="#desc4">Copiar
+                    Cupom</button></a>
+
+        </div>
+
+        <!-- OVERLAY Problem Solving -->
+        <div style="padding: 24px;" class="hide premio">
+            <h2>Desculpe...</h2>
+
+            <p id="desc5"> Tente Novamente</p>
+        </div>
+
+        <!-- OVERLAY Leadership -->
+        <div style="padding: 24px;" id="leadership" class="hide premio">
+            <h2>Desculpe...</h2>
+
+            <p id="desc6"> Tente Novamente</p>
+        </div>
+
+        <!-- OVERLAY Organisation -->
+        <div style="padding: 24px;" id="organisation" class="hide premio">
+            <h2>Desculpe...</h2>
+
+            <pid="desc8"> Tente Novamente</p>
+        </div>
+
+        <!-- OVERLAY Entrepreneurial Skills -->
+        <div style="padding: 24px;" id="entrepreneurial-skills" class="hide premio">
+            <h2>Desculpe...</h2>
+
+            <p id="desc8"> Tente Novamente</p>
+        </div>
+    </div>
+
+
+    <style>
+        .boneco-neve {
+            display: block;
+            margin: auto;
+            margin-block: -889px auto;
+
+        }
+
+        @media only screen and (max-width: 1500px) {
+            .boneco-neve {
+                width: 0%;
+                display: none;
+            }
+        }
+
+        @media only screen and (max-width: 750px) {
+            .boneco-neve {
+                width: 0%;
+
+            }
+        }
+    </style>
+    <div class="boneco-neve">
+        <img style="display: block;
+        height: auto;
+        margin-block: auto;
+        margin: auto 59%;
+        max-height: 700px;
+" src="https://s3-sa-east-1.amazonaws.com/marketing.totalcad.com.br/2022/Roleta/Ativo%2060.png">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/velocity/1.0.0/velocity.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js'></script>
+    <script src="./script.js"></script>
+    <script>
+        // sequential order
+        // advances 3 segments each click
+        var _target, _deg = 0;
+        function ordSequential() {
+            // order : 1,4,7,2,5,8,3,6 ... then loops
+            return _deg = _deg + (45 * 3) + 1080;
+        };
+        jQuery(document).ready(function ($) {
+            $(".skills-wheel .btn").on("click", function (e) {
+                // select algorithm sequential, random or preset :
+                ordSequential();
+                _target = (_deg - (360 * parseInt(_deg / 360))) / 45;
+                // start animation
+                // reset opacity of all segments to 1
+                $(".fancybox").parent("li").velocity({
+                    opacity: 1
+                }, {
+                    duration: 100,
+                    complete: function () {
+                        $(".wheel").velocity({
+                            rotateZ: "-" + _deg + "deg"
+                        }, {
+                            duration: 3000,
+                            complete: function (elements) {
+                                // after spinning animation is completed, set opacity of target segment's parent
+                                $(".fancybox").parent("li").eq(_target).velocity({
+                                    opacity: 0.8
+
+                                }, {
+                                    duration: 100,
+                                    // after opacity is completed, fire targeted segment in fancybox
+                                    complete: function () {
+                                        $(".fancybox").eq(_target).trigger("click");
+
+                                    } // third animation completed
+                                }); // nested velocity 2
+                            } // second animation completed
+                        }); // nested velocity 1
+                    } // first animation completed
+                }); // velocity
+                return false;
+            }); // click
+
+            // initialize fancybox
+            $(".fancybox").fancybox({
+                maxWidth: "85%"
+            });
+        }); // ready
+
+        // copiar texto
+        function copyFunction() {
+            //   var copyText = document.querySelector(".fancybox-opened .premio span")
+            let buttons = document.querySelectorAll("#copyButton");
+            let wheel = document.querySelector('.skills-wheel');
+
+            //   navigator.clipboard.writeText(copyText.innerText);
+
+            for (let button of buttons) {
+                button.innerText = "Copiado"
+            }
+            wheel.style.display = "none";
+        }
+
+        var btns = document.querySelectorAll('.premio button');
+        var clipboard = new ClipboardJS(btns);
+
+        clipboard.on('success', function (e) {
+            console.log(e);
+        });
+
+        clipboard.on('error', function (e) {
+            console.log(e);
+        });
+    </script>
+
+
+</body>
+
+</html>
